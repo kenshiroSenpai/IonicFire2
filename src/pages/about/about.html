@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="myForm" (ngSubmit)="fillSurvey(myForm.value)" novalidate>
+    <!-- Name input -->
+    <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input formControlName="name" [(ngModel)]="check.name" type="text" placeholder="Your name" [class.invalid]="!myForm.controls.name.valid &&  myForm.controls.name.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!myForm.controls.name.valid && myForm.controls.name.dirty">
+      <p>(3-25) characteres</p>
+    </ion-item>
+    <!-- Last Name input -->
+    <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input formControlName="lastName" [(ngModel)]="check.lastName" type="text" placeholder="Your last name"
+        [class.invalid]="!myForm.controls.lastName.valid &&  myForm.controls.lastName.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!myForm.controls.lastName.valid && myForm.controls.lastName.dirty">
+      <p>(3-25) characteres</p>
+    </ion-item>
+    <!-- Age input -->
+    <ion-item>
+      <ion-label stacked>Age</ion-label>
+      <ion-input formControlName="age" [(ngModel)]="check.age" type="number" placeholder="Your age" [class.invalid]="!myForm.controls.age.valid &&  myForm.controls.age.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!myForm.controls.age.valid && myForm.controls.age.dirty">
+      <p>you need to be of legal age (18)</p>
+    </ion-item>
+    <!-- Select Country  -->
+    <ion-item>
+      <ion-label stacked>Country</ion-label>
+      <ion-select formControlName="country" [(ngModel)]="check.country" placeholder="Select Country" [class.invalid]="!myForm.controls.country.valid &&  myForm.controls.country.dirty">
+        <!-- <ion-option value="" default></ion-option> -->
+        <ion-option ngValue value="spain">Spain</ion-option>
+        <ion-option value="italy">Italy</ion-option>
+        <ion-option value="germany">Germany</ion-option>
+        <ion-option value="france">France</ion-option>
+      </ion-select>
+    </ion-item>
+    <!-- Radio of points  -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>level of satisfaction: </ion-label>
+      </ion-list-header>
+      <ion-row radio-group formControlName="points" [(ngModel)]="check.points">
+        <ion-col>
+          <ion-item>
+            <ion-label>1</ion-label>
+            <ion-radio slot="start" value="1" checked></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>2</ion-label>
+            <ion-radio slot="start" value="2"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>3</ion-label>
+            <ion-radio slot="start" value="3"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>4</ion-label>
+            <ion-radio slot="start" value="4"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <!-- email input -->
+    <ion-item>
+      <ion-label stacked>subscribe: </ion-label>
+      <ion-input formControlName="email" [(ngModel)]="check.email" type="email" placeholder="Your last name"
+        [class.invalid]="!myForm.controls.email.valid &&  myForm.controls.email.dirty">
+      </ion-input>
+      <ion-item class="error-message" *ngIf="!myForm.controls.email.valid && myForm.controls.email.dirty"></ion-item>
+    </ion-item>
+    <button ion-button block type="submit" [disabled]="myForm.invalid" (click)="presentToast()">Enviar</button>
+  </form>
+
+</ion-content>
