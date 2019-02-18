@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthenticationRoomPage } from '../authentication-room/authentication-room';
-
+// import { TabsPage } from '../tabs/tabs';
+import { AccountPage } from '../account/account';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-home',
@@ -10,19 +12,24 @@ import { AuthenticationRoomPage } from '../authentication-room/authentication-ro
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private authFirebase: AngularFireAuth) {
+  RSSParser;
+  targetUrl: string;
+  entries: Array<any> = [];
+
+  constructor(public navCtrl: NavController, private authFirebase: AngularFireAuth,
+    private app: App, private iaBrowser: InAppBrowser) {
 
   }
 
-  // logOut() {
-  //   try {
+  logOut() {
+    this.authFirebase.auth.signOut().then(() => {
+      this.app.getRootNav().setRoot(AuthenticationRoomPage);
+      console.log("salio");
+    });
+  }
 
-  //     this.authFirebase.auth.signOut().then(() => {
-  //       this.navCtrl.setRoot(AuthenticationRoomPage);
-  //     });
-  //   } catch (error) {
-
-  //   }
-
-  // }
+  goAccount() {
+    this.navCtrl.push(AccountPage);
+  }
 }
+

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth'
-import { TabsPage } from '../tabs/tabs';
+import { RegisterDatasPage } from '../register-datas/register-datas';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -20,8 +20,7 @@ export class RegisterPage {
   myForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private fireAuth: AngularFireAuth, private alertCtrl: AlertController,
-    private toastCtrl: ToastController) { }
+    private fireAuth: AngularFireAuth, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -41,24 +40,15 @@ export class RegisterPage {
 
   async registerUser(myForm: { email: string, password: string }) {
     try {
-      var user = this.fireAuth.auth.currentUser;
       const res = await this.fireAuth.auth.createUserWithEmailAndPassword(myForm.email, myForm.password);
-      if (user) {
-        this.fireAuth.authState.subscribe(info => {
-          this.toastCtrl.create({
-            message: `Welcome ${info.email}`,
-            duration: 3000
-          }).present();
-          this.navCtrl.setRoot(TabsPage);
-        });
+      if (res) {
+        this.navCtrl.setRoot(RegisterDatasPage);
       } else {
         console.log("salio mal wuey");
       }
-      this.navCtrl.setRoot(TabsPage);
-      console.log(res);
     } catch (error) {
-      this.presentAlert();
       console.log(error);
+      this.presentAlert();
     }
   }
 }

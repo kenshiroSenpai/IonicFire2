@@ -1,13 +1,38 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goAccount()">
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome!</h2>
-  <p>
-    this app is to organize the purchase, Have fun!
-  </p>
-<!-- <button ion-button (click)="logOut()">LOGOUT</button> -->
+  <!-- <h2>Welcome!</h2> -->
+
+  <!-- <ion-input [(ngModel)]="targetUrl" placeholder="Please enter an RSS/Atom Feed URL"></ion-input>
+  <button ion-button (click)="checkUrl()">Fetch Feed </button>
+  <ion-list>
+    <ion-item-sliding *ngFor="let entry of entries">
+      <ion-item>
+        <a (click)="openUrl(entry)"></a>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list> -->
+  <ion-item>
+  <a type="application/rss+xml" href="../../assets/rss.xml">
+    <img src="../../assets/imgs/rss.png">
+  </a>
+  </ion-item>
+  <button ion-button (click)="logOut()">LOGOUT</button>
 </ion-content>
+
+<!-- <ion-app></ion-app>
+<script src="assets/js/rss-parser.min.js"></script>
+ The polyfills js is generated during the build process -->
+<!-- <script src="build/polyfills.js"></script> -->
+
+<!-- The bundle js is generated during the build process -->
+<!-- <script src="build/main.js"></script>  -->

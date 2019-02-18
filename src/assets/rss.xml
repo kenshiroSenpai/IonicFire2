@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0">
+
+    <channel>
+
+        <title>Oferta mercadona</title>
+
+        <link>https://www.google.com/</link>
+
+        <description>Inserte contenido de interes</description>
+
+        <item>
+
+            <title>Oferta de ionic</title>
+
+            <link>https://www.google.com/</link>
+
+            <description>Inserte contenido de interes</description>
+
+        </item>
+
+    </channel>
+
+</rss>

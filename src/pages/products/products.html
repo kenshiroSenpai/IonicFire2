@@ -14,5 +14,12 @@
 
 
 <ion-content padding>
-
+  <button ion-button (click)="createMountain()">Create Task</button>
+  <ion-list>
+    <ion-item-sliding *ngFor='let data of datas | async'>
+      <ion-item (click)="enterTask()">
+        <ion-label>{{data.name}}</ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

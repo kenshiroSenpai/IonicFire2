@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
@@ -23,26 +25,27 @@ export class ListPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public database: AngularFireDatabase,
-    public loadingController: LoadingController) {
-    this.refList = this.database.list('lists');
+    public loadingController: LoadingController, private fireAuth: AngularFireAuth,
+    public afStorage: AngularFireStorage) {
+    var user = this.fireAuth.auth.currentUser;
+    this.refList = this.database.list(`lists/${user.uid}`);
     this.lists = this.refList.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
   }
 
   ngOnInit() {
-    const loading =  this.loadingController.create({
+    const loading = this.loadingController.create({
       content: "Loading...",
       dismissOnPageChange: true
-
     });
     return loading.present();
   }
 
   showMessageCreateList() {
     this.alertCtrl.create({
-      title: 'Crear nueva lista',
-      message: 'Escribe como quiere llamar a la lista.',
+      title: 'Create new list',
+      message: 'Write a task:',
       inputs: [
         {
           name: 'list',

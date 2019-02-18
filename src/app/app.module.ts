@@ -1,10 +1,13 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, LoadingController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth'; 
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { Camera } from '@ionic-native/camera';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
@@ -15,17 +18,22 @@ import { InfoPage } from '../pages/info/info';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AuthenticationRoomPage } from '../pages/authentication-room/authentication-room';
+import { AccountPage } from '../pages/account/account';
+import{ RegisterDatasPage } from '../pages/register-datas/register-datas';
+import { AdministratorPage } from '../pages/administrator/administrator';
+import { EnterTaskPage } from '../pages/enter-task/enter-task';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 export const config = {
-  apiKey: "AIzaSyDw3-1eAH_r0NUH4W_IzjArXJYKnUtwq5A",
-  authDomain: "mercado-63b66.firebaseapp.com",
-  databaseURL: "https://mercado-63b66.firebaseio.com",
-  projectId: "mercado-63b66",
-  storageBucket: "mercado-63b66.appspot.com",
-  messagingSenderId: "834981011403"
+  apiKey: "AIzaSyBu6JqQtf5IJdRSxJha234WWvJm5vsM3xE",
+  authDomain: "lista-48220.firebaseapp.com",
+  databaseURL: "https://lista-48220.firebaseio.com",
+  projectId: "lista-48220",
+  storageBucket: "lista-48220.appspot.com",
+  messagingSenderId: "637335624040"
 };
 
 
@@ -40,13 +48,18 @@ export const config = {
     InfoPage,
     LoginPage,
     RegisterPage,
-    AuthenticationRoomPage
+    AuthenticationRoomPage,
+    AccountPage,
+    RegisterDatasPage,
+    AdministratorPage,
+    EnterTaskPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,13 +72,21 @@ export const config = {
     InfoPage,
     LoginPage,
     RegisterPage,
-    AuthenticationRoomPage
+    AuthenticationRoomPage,
+    AccountPage,
+    RegisterDatasPage,
+    AdministratorPage,
+    EnterTaskPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    AngularFireAuth,
+    LoadingController,
+    Camera,
+    ImagePicker
   ]
 })
 export class AppModule {}
