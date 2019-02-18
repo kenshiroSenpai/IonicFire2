@@ -14,13 +14,14 @@
 
 
 <ion-content padding>
+  <button ion-button (click)="createTask()">Create task</button>
   <ion-list>
     <ion-item-sliding *ngFor='let data of datas | async'>
-      <ion-item (click)="updateTask1(data)">
-        <ion-label>{{data.task1}}</ion-label>
+      <ion-item (click)="updateTask(data)" *ngIf="data.tasks">
+        <ion-label>{{data.tasks}}</ion-label>
       </ion-item>
-      <ion-item (click)="updateTask2(data)">
-        <ion-label>{{data.task2}}</ion-label>
+      <ion-item *ngIf="data.tasks">
+        <button ion-button color="danger" (click)="deleteTask(data)">Delete</button>
       </ion-item>
     </ion-item-sliding>
   </ion-list>

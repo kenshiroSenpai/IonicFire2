@@ -26,14 +26,13 @@ export class ProductsPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public afDatabase: AngularFireDatabase, public afStorage: AngularFireStorage,
     public afAuth: AngularFireAuth, private alertCtrl: AlertController) {
+      this.refTask = this.afDatabase.list(`task/${this.user.uid}`);
+      this.datas = this.refTask.snapshotChanges().map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      });
   }
 
-  ngOnInit() {
-    this.refTask = this.afDatabase.list(`task/${this.user.uid}`);
-    this.datas = this.refTask.snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
-  }
+  ngOnInit() {}
 
   createMountain() {
     this.alertCtrl.create({
@@ -44,6 +43,11 @@ export class ProductsPage implements OnInit {
           name: 'value',
           type: 'text',
           placeholder: 'Name of the task'
+        },
+        {
+          name: 'description',
+          type: 'text',
+          placeholder: 'Describe the task'
         }
       ],
       buttons: [
@@ -53,14 +57,11 @@ export class ProductsPage implements OnInit {
         {
           text: 'Save',
           handler: data => {
-            this.newTask = data.value;
-            console.log("entro");
             if (data.value === "") {
               return false;
             } else {
               this.refTask.set(data.value, {
-                task1: "",
-                task2: ""
+                description: data.description
               });
             }
           }
@@ -69,9 +70,9 @@ export class ProductsPage implements OnInit {
     }).present();
   }
 
-  enterTask() {
+  enterTask(data) {
     this.navCtrl.push(EnterTaskPage, {
-      task: this.newTask
+      task: data.key
     })
   }
 

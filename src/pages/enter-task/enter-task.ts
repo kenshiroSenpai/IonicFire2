@@ -36,38 +36,33 @@ export class EnterTaskPage implements OnInit {
   ngOnInit() {
     console.log(this.refList);
     
+    
   }
 
-  // createTask() {
-  //   this.alertCtrl.create({
-  //     title: "Add task",
-  //     message: "Write a task:",
-  //     inputs: [
-  //       {
-  //         name: 'value',
-  //         type: 'text',
-  //         placeholder: 'task1'
-  //       },
-  //     ],
-  //     buttons: [
-  //       {
-  //         text: 'Cancel'
-  //       },
-  //       {
-  //         text: 'Save',
-  //         handler: data => {
-  //           if (data.value === "") {
-  //             return false;
-  //           } else {
-  //             this.afDatabase.database.ref(`task/${this.user.uid}/${this.task}`)
-  //           }
-  //         }
-  //       }
-  //     ]
-  //   }).present();
-  // }
+  createTask(){
+    this.alertCtrl.create({
+      title: "modify a task",
+      inputs:[
+        {
+          name: "value",
+          type: "text",
+          placeholder: "new task"
+        }
+      ],
+      buttons: [ 
+        {
+          text: "confirm",
+          handler: data =>{
+            this.refList.push({
+              tasks: data.value
+            });
+          }
+        }
+      ]
+    }).present();
+  }
 
-  updateTask1(newData){
+  updateTask(newData){
     this.alertCtrl.create({
       title: "modify a task",
       inputs:[
@@ -82,35 +77,32 @@ export class EnterTaskPage implements OnInit {
           text: "confirm",
           handler: data =>{
             this.refList.update(newData.key,{
-              task1: data.value
+              tasks: data.value
             });
           }
+        },
+        {
+          text: "Cancel"
         }
       ]
-    });
+    }).present();
   }
 
-  updateTask2(newData){
+  deleteTask(newData){
     this.alertCtrl.create({
-      title: "modify a task",
-      inputs:[
+      title: "Do you want delete this task?",
+      buttons: [
         {
-          name: "value",
-          type: "text",
-          placeholder: "new task"
-        }
-      ],
-      buttons: [ 
-        {
-          text: "confirm",
-          handler: data =>{
-            this.refList.update(newData.key,{
-              task2: data.value
-            });
+          text: "Yes, please",
+          handler: () => {
+            this.refList.remove(newData.key);
           }
+        },
+        {
+          text: "NO!"
         }
       ]
-    });
+    }).present();
   }
 
 }
