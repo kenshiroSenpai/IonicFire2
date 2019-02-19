@@ -14,12 +14,17 @@
 
 
 <ion-content padding>
-  <button ion-button (click)="createMountain()">Create Task</button>
+  <h4>Create a list of task if not exists, if exists, click in him to enter in yours particular task and add more tasks.</h4>
+  <button ion-button (click)="createMountain()">Create list of Task</button>
   <ion-list>
     <ion-item-sliding *ngFor='let data of datas | async'>
       <ion-item (click)="enterTask(data)">
         <ion-label>{{data.key}}</ion-label>
         <ion-label>{{data.description}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <button ion-button (click)=" deleteTask(data)">Delete</button>
+        <button ion-button (click)="updateTask(data)">Modify</button>
       </ion-item>
     </ion-item-sliding>
   </ion-list>

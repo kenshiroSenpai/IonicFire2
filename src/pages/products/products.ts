@@ -70,6 +70,37 @@ export class ProductsPage implements OnInit {
     }).present();
   }
 
+  deleteTask(newData){
+    this.refTask.remove(newData.key);
+  }
+
+  updateTask(newData){
+    this.alertCtrl.create({
+      title: "Modify the description",
+      inputs: [
+
+        {
+          name: "describe",
+          type: "text",
+          placeholder: "update the description"
+        }
+      ],
+      buttons: [
+        {
+          text: "YES",
+          handler: data =>{
+            this.refTask.update(newData.key, {
+              description: data.describe
+            });
+          }
+        },
+        {
+          text: "NO"
+        }
+      ]
+    }).present();
+  }
+
   enterTask(data) {
     this.navCtrl.push(EnterTaskPage, {
       task: data.key
