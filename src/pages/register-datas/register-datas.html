@@ -25,8 +25,7 @@
     </ion-item>
     <ion-item class="error-message" *ngIf="!myFormUser.controls.username.valid && myFormUser.controls.username.dirty">
       <p>(3-25) characteres</p>
-    </ion-item>
-
+    </ion-item>''
     <!-- Personal info -->
     <ion-item>
       <ion-label stacked>How your describe?</ion-label>
@@ -42,7 +41,6 @@
       <ion-label stacked>Country</ion-label>
       <ion-select formControlName="country" [(ngModel)]="check.country" placeholder="Select Country"
         [class.invalid]="!myFormUser.controls.country.valid &&  myFormUser.controls.country.dirty">
-        <!-- <ion-option value="" default></ion-option> -->
         <ion-option ngValue value="spain">Spain</ion-option>
         <ion-option value="italy">Italy</ion-option>
         <ion-option value="germany">Germany</ion-option>
@@ -50,11 +48,9 @@
       </ion-select>
     </ion-item>
     <!-- Image of profile -->
-
     <button ion-button block type="submit" [disabled]="myFormUser.invalid || !isDownload"
       (click)="presentToastSuccessfully(myFormUser.value)">Enviar</button>
   </form>
   <button ion-button clear (click)="grabPicture()">Take a photo</button>
-  <!-- <button ion-button (click)="choosePicture()">Choose photo</button> -->
   <img src="{{photo}}" />
 </ion-content>

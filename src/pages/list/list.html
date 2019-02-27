@@ -17,6 +17,17 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Your List
+    </ion-card-header>
+    <ion-card-content>
+      Create elements with the button '+'.
+      You can delete the element if you checked the element.
+    </ion-card-content>
+  </ion-card>
+
   <ion-list>
     <ion-item-sliding *ngFor='let newList of lists | async'>
       <ion-item>
@@ -29,5 +40,5 @@
       </ion-item>
     </ion-item-sliding>
   </ion-list>
-  
+
 </ion-content>

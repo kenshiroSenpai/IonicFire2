@@ -7,13 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Info</ion-title>
+    <ion-title>Survey</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Survey
+    </ion-card-header>
+    <ion-card-content>
+      This tab is about your data and opinion about this app.
+    </ion-card-content>
+  </ion-card>
+
   <button ion-button (click)="goToAbout()">Tell us your opinion</button>
   <div id="btnAmdin">
     <button ion-button (click)="goToAboutAdmin()">See the surveys</button>

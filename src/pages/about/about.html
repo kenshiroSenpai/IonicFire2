@@ -1,17 +1,29 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+     
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Survey
+    </ion-card-header>
+    <ion-card-content>
+      Please, fill the survey with sincerity.
+      Thank you!
+    </ion-card-content>
+  </ion-card>
+
   <form [formGroup]="myForm" (ngSubmit)="fillSurvey(myForm.value)" novalidate>
     <!-- Name input -->
     <ion-item>
       <ion-label stacked>Name</ion-label>
-      <ion-input formControlName="name" [(ngModel)]="check.name" type="text" placeholder="Your name" [class.invalid]="!myForm.controls.name.valid &&  myForm.controls.name.dirty">
+      <ion-input formControlName="name" [(ngModel)]="check.name" type="text" placeholder="Your name"
+        [class.invalid]="!myForm.controls.name.valid &&  myForm.controls.name.dirty">
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!myForm.controls.name.valid && myForm.controls.name.dirty">
@@ -30,7 +42,8 @@
     <!-- Age input -->
     <ion-item>
       <ion-label stacked>Age</ion-label>
-      <ion-input formControlName="age" [(ngModel)]="check.age" type="number" placeholder="Your age" [class.invalid]="!myForm.controls.age.valid &&  myForm.controls.age.dirty">
+      <ion-input formControlName="age" [(ngModel)]="check.age" type="number" placeholder="Your age"
+        [class.invalid]="!myForm.controls.age.valid &&  myForm.controls.age.dirty">
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!myForm.controls.age.valid && myForm.controls.age.dirty">
@@ -39,7 +52,8 @@
     <!-- Select Country  -->
     <ion-item>
       <ion-label stacked>Country</ion-label>
-      <ion-select formControlName="country" [(ngModel)]="check.country" placeholder="Select Country" [class.invalid]="!myForm.controls.country.valid &&  myForm.controls.country.dirty">
+      <ion-select formControlName="country" [(ngModel)]="check.country" placeholder="Select Country"
+        [class.invalid]="!myForm.controls.country.valid &&  myForm.controls.country.dirty">
         <!-- <ion-option value="" default></ion-option> -->
         <ion-option ngValue value="spain">Spain</ion-option>
         <ion-option value="italy">Italy</ion-option>

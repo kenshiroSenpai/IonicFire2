@@ -14,6 +14,16 @@
 
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Surveys
+    </ion-card-header>
+    <ion-card-content>
+      You can add notes for each survey and delete.
+    </ion-card-content>
+  </ion-card>
+
   <ion-list>
     <ion-item-sliding *ngFor='let list of lists | async'>
       <ion-item>
@@ -43,7 +53,7 @@
       <ion-item>
         <button ion-button color="danger" (click)="removeItem(list)">delete survey</button>
         <!-- <div id="addButton"> -->
-          <button ion-button color="secondary" (click)="createNote(list)">Add note</button>
+        <button ion-button color="secondary" (click)="createNote(list)">Add note</button>
         <!-- </div> -->
       </ion-item>
     </ion-item-sliding>

@@ -16,7 +16,6 @@
 <ion-content padding>
   <ion-list>
     <form novalidate (ngSubmit)="registerUser(myForm.value)" [formGroup]="myForm">
-
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="email" [(ngModel)]="check.email" formControlName="email" [class.error1]="!myForm.controls.email.valid && myForm.controls.email.dirty"></ion-input>

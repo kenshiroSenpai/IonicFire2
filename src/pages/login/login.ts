@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../tabs/tabs';
-import { AdministratorPage } from '../administrator/administrator';
 
 /**
  * Generated class for the LoginPage page.
@@ -24,7 +23,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private fireAuth: AngularFireAuth, private alertCtrl: AlertController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
@@ -34,27 +33,35 @@ export class LoginPage {
     });
   }
 
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: 'Some of the data is wrong, please check the data',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
   async login(myForm: { email: string, password: string }) {
+    let loading = this.loadingCtrl.create({
+      content: "Loading..."
+    });
+    loading.present();
     try {
       const res = await this.fireAuth.auth.signInWithEmailAndPassword(myForm.email, myForm.password);
       if (res) {
+        loading.dismiss();
         this.toastCtrl.create({
-          message: `Welcome ` + myForm.email,
+          message: `Welcome ` + myForm.email.toLocaleLowerCase(),
           duration: 3000
         }).present();
         this.navCtrl.setRoot(TabsPage);
       }
     } catch (error) {
-      this.presentAlert();
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: 'Some of the data is wrong, please check the data',
+        buttons: [
+          {
+            text: "OK",
+            handler: () =>{
+              loading.dismiss();
+            }
+          }
+        ]
+      });
+      alert.present();
     }
   }
 }

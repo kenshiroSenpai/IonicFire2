@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController} from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth'
 import { RegisterDatasPage } from '../register-datas/register-datas';
@@ -20,7 +20,8 @@ export class RegisterPage {
   myForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private fireAuth: AngularFireAuth, private alertCtrl: AlertController) { }
+    private fireAuth: AngularFireAuth, private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -29,26 +30,44 @@ export class RegisterPage {
     });
   }
 
-  presentAlert() {
+  alert() {
     let alert = this.alertCtrl.create({
       title: 'Error',
       subTitle: 'Some of the data is wrong, please check the data',
-      buttons: ['OK']
+      buttons: [
+        {
+          text: "OK"
+        }
+      ]
     });
     alert.present();
   }
 
   async registerUser(myForm: { email: string, password: string }) {
+    let loading = this.loadingCtrl.create({
+      content: "Loading..."
+    });
+    loading.present();
     try {
-      const res = await this.fireAuth.auth.createUserWithEmailAndPassword(myForm.email, myForm.password);
+      const res = await this.fireAuth.auth.signInWithEmailAndPassword(myForm.email, myForm.password);
       if (res) {
+        loading.dismiss();
         this.navCtrl.setRoot(RegisterDatasPage);
-      } else {
-        console.log("salio mal wuey");
       }
     } catch (error) {
-      console.log(error);
-      this.presentAlert();
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: 'Some of the data is wrong, please check the data',
+        buttons: [
+          {
+            text: "OK",
+            handler: () =>{
+              loading.dismiss();
+            }
+          }
+        ]
+      });
+      alert.present();
     }
   }
 }

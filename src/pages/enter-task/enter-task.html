@@ -14,7 +14,14 @@
 
 
 <ion-content padding>
-  <h4>Add tasks in your list of task, if exists, click in him to modify the task of your list of tasks.</h4>
+    <ion-card>
+        <ion-card-header>
+          task
+        </ion-card-header>
+        <ion-card-content>
+            Add tasks in your list of task, if exists, click in him to modify the task of your list of tasks.
+        </ion-card-content>
+      </ion-card>
   <button ion-button (click)="createTask()">Create task</button>
   <ion-list>
     <ion-item-sliding *ngFor='let data of datas | async'>
