@@ -30,26 +30,13 @@ export class RegisterPage {
     });
   }
 
-  alert() {
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: 'Some of the data is wrong, please check the data',
-      buttons: [
-        {
-          text: "OK"
-        }
-      ]
-    });
-    alert.present();
-  }
-
   async registerUser(myForm: { email: string, password: string }) {
     let loading = this.loadingCtrl.create({
       content: "Loading..."
     });
     loading.present();
     try {
-      const res = await this.fireAuth.auth.signInWithEmailAndPassword(myForm.email, myForm.password);
+      const res = await this.fireAuth.auth.createUserWithEmailAndPassword(myForm.email, myForm.password);
       if (res) {
         loading.dismiss();
         this.navCtrl.setRoot(RegisterDatasPage);
